@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/parallax.min.js"></script>
+  <script src="js/jquery.maskedinput.min.js"></script>
+  <script>
+    jQuery(function($){
+    $(".phone").mask("+7 (999) 999-99-99");
+    });
+  </script>
+  <script>
+    $('form').submit(function(event) {
+      event.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: "mailer/smart.php",
+        data: $(this).serialize()
+      }).done(function() {
+        $(this).find("input").val("");
+        alert("Сообщение успешно отправлено");
+        $("form").trigger("reset");
+      });
+  	  $('.popup').fadeOut();
+      return false;
+    });
+  </script>
+  <script>
+  	$(document).ready(function(){
+  	  $('.popup-btn').on('click', function(event){
+  	  	event.preventDefault(); // Отменяем стандартное нажатие на кнопку
+  	  	$('.popup').fadeIn();
+  	   // Вызов модального окна
+  	  });
+  	  $('.phone-link').on('click', function(event){
+  	  	event.preventDefault(); // Отменяем стандартное нажатие на кнопку
+  	  	$('.popup').fadeIn(); // Вызов модального окна
+  	  });
+  	  $('.popup-close').on('click', function(event) { // Кнопка закрыть
+  	  	event.preventDefault();
+  	  	$('.popup').fadeOut();
+  	  });
+  	  $('.captureFormform-btn').on('click', function(event){
+  	  	event.preventDefault();
+  	  	$('.popup').fadeOut();
+  	  });
+  	});
+ 	</script>
+ 	<script src="js/rellax.min.js"></script>
+ 	<script>
+    var rellax = new Rellax('.rellax');
+  </script>
+
+</body>
+</html>
